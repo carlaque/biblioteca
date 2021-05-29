@@ -1,12 +1,13 @@
-create table if not exists livro(
+create table if not exists livros(
     id int auto_increment primary key,
     isbn varchar(20) not null,
     titulo varchar(255),
     autor varchar(255),
-    genero varchar(255)
+    genero varchar(255),
+    CONSTRAINT livros_unique UNIQUE (isbn)
 );
 
--- insert into livro(isbn,titulo,autor,genero)
+-- insert into livros(isbn,titulo,autor,genero)
 -- values
 -- ('9788599296493','O NOME DO VENTO','PATRICK ROTHFUSS','Literatura americana'),
 -- ('9788580410327','O temor do sábio','Patrick Rothfuss','Literatura americana'),

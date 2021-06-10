@@ -12,6 +12,9 @@ import com.fatec.biblioteca.models.Livro;
 import com.fatec.biblioteca.repositories.LivroRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -24,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@CrossOrigin
+//@CrossOrigin
 @RestController
 @RequestMapping("/livros")
 public class LivroController {
@@ -33,9 +36,10 @@ public class LivroController {
     LivroRepository livroRepository;
 
     @GetMapping
-    public List<LivroDto> list() {
-        List<Livro> livros = livroRepository.findAll();
-        return LivroDto.converter(livros);
+//    @Cacheable(value = "livros")
+    public ResponseEntity<Page<LivroDto>> list(Pageable pagination) {
+        Page<Livro> livros = livroRepository.findAll(pagination);
+        return ResponseEntity.ok().body(LivroDto.converter(livros));
     }
 
     @PostMapping

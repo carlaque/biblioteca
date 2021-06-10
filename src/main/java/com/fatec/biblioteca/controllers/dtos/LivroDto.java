@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.fatec.biblioteca.models.Livro;
+import org.springframework.data.domain.Page;
 
 public class LivroDto {
 
@@ -21,8 +22,8 @@ public class LivroDto {
         this.genero = livro.getGenero();
     }
 
-    public static List<LivroDto> converter(List<Livro> livros) {
-		return livros.stream().map(LivroDto::new).collect(Collectors.toList());
+    public static Page<LivroDto> converter(Page<Livro> livros) {
+		return livros.map(LivroDto::new);
 	}
 
     public Long getId() {

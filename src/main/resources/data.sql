@@ -1,3 +1,20 @@
+create table if not exists users(
+    id int auto_increment primary key,
+    username varchar(50) not null,
+    senha varchar(150) not null
+);
+
+create table if not exists perfil(
+    id int auto_increment primary key,
+    nome varchar(50) not null
+);
+
+create table if not exists users_perfil(
+    users_id int,
+    perfil_id int
+);
+
+
 create table if not exists livros(
     id int auto_increment primary key,
     isbn varchar(20) not null,

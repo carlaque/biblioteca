@@ -2,10 +2,10 @@ package com.fatec.biblioteca.controllers.forms;
 
 import java.util.Optional;
 
-import com.fatec.biblioteca.models.Livro;
-import com.fatec.biblioteca.repositories.LivroRepository;
+import com.fatec.biblioteca.models.Book;
+import com.fatec.biblioteca.repositories.BookRepository;
 
-public class LivroForm {
+public class BookForm {
 
     private String isbn;
     private String titulo;
@@ -28,12 +28,12 @@ public class LivroForm {
         this.genero = genero;
     }
 
-    public Livro converter() {
-        return new Livro(this.isbn,this.titulo,this.autor,this.genero);
+    public Book converter() {
+        return new Book(this.isbn,this.titulo,this.autor,this.genero);
     }
 
-    public Livro atualizar(String isbn, LivroRepository livroRepository) {
-		Optional<Livro> livro = livroRepository.findByIsbn(isbn);
+    public Book atualizar(String isbn, BookRepository bookRepository) {
+		Optional<Book> livro = bookRepository.findByIsbn(isbn);
         if(livro.isPresent()){
             livro.get().setIsbn(this.isbn);
             livro.get().setTitulo(this.titulo);

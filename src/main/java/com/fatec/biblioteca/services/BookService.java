@@ -26,7 +26,8 @@ public class BookService {
 
     public ResponseEntity<BookDto> post( BookForm form, UriComponentsBuilder uriBuilder) {
         Book book = form.converter();
-        bookRepository.save(book);
+//        bookRepository.save(book);
+        bookRepository.salvar(book.getIsbn(),book.getTitulo(), book.getAutor(), book.getGenero());
 
         URI uri = uriBuilder.path("/books/{isbn}").buildAndExpand(book.getId()).toUri();
         return ResponseEntity.created(uri).body(new BookDto(book));
